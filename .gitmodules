@@ -1,0 +1,12 @@
+[submodule "src/c3p-voxelmap"]
+	path = src/c3p-voxelmap
+	url = https://github.com/deptrum/c3p-voxelmap
+[submodule "src/VoxelMap"]
+	path = src/VoxelMap
+	url = https://github.com/hku-mars/VoxelMap.git
+[submodule "src/livox_ros_driver"]
+	path = src/livox_ros_driver
+	url = https://github.com/Livox-SDK/livox_ros_driver.git
+[submodule "src/c3p-voxelmap-to-hdmapping/src/3rdparty/LASzip"]
+	path = src/c3p-voxelmap-to-hdmapping/src/3rdparty/LASzip
+	url = https://github.com/LASzip/LASzip.git
