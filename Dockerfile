@@ -40,6 +40,8 @@ RUN git clone https://github.com/Livox-SDK/Livox-SDK.git && \
 WORKDIR /ros_ws
 
 COPY ./src ./src
+COPY ./patches/c3p-voxelmap/config/livox.yaml src/c3p-voxelmap/config/livox.yaml
+COPY ./patches/c3p-voxelmap/launch/mapping_livox.launch src/c3p-voxelmap/launch/mapping_livox.launch
 
 RUN sed -i \
     -e 's|lid_topic:.*|lid_topic:  "/livox/lidar"|' \
