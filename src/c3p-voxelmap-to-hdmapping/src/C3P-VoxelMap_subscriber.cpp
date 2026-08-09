@@ -323,7 +323,7 @@ int main(int argc, char **argv)
     // remaining pc
     std::cout << "reamaining points: " << chunk.size() << std::endl;
 
-    if (chunk.size() > 1000000)
+    if (chunk.size() > 0)
     {
         chunks_pc.push_back(chunk);
     }

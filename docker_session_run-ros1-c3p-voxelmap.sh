@@ -74,7 +74,7 @@ docker run -it --rm \
     tmux send-keys -t '"$TMUX_SESSION"' '\''sleep 5
 source /opt/ros/noetic/setup.bash
 source /ros_ws/devel/setup.bash
-roslaunch c3p_voxelmap mapping_velodyne.launch use_sim_time:=true
+roslaunch c3p_voxelmap mapping_livox.launch use_sim_time:=true
 '\'' C-m
 
     # ---------- PANEL 2: rosbag record ----------
