@@ -47,6 +47,22 @@ RUN sed -i \
     -e 's|lidar_type:.*|lidar_type: 1|' \
     src/c3p-voxelmap/config/velodyne.yaml
 
+# Canonical-bag sensor profile (config + launch), kept out of the upstream
+# c3p-voxelmap submodule: its own velodyne.yaml with only the sensor description
+# changed.
+COPY ./overlay/config/ ./src/c3p-voxelmap/config/
+COPY ./overlay/launch/ ./src/c3p-voxelmap/launch/
+
+# Canonical bag: the VELO32 handler (lidar_type 5) converts the per-point
+# `time` field to milliseconds with time * 1e-3, i.e. it expects microseconds;
+# the canonical bag's `time` is in seconds (as Velodyne drivers publish it), so
+# deskew would see ~0 offsets. Use time * 1e3. Fails the build if the line
+# changes.
+RUN f=src/c3p-voxelmap/src/preprocess.cpp && \
+    [ "$(grep -c 'added_pt.curvature = pl_orig.points\[i\].time \* 1e-3;' $f)" = 1 ] && \
+    sed -i 's/added_pt.curvature = pl_orig.points\[i\].time \* 1e-3;/added_pt.curvature = pl_orig.points[i].time * 1e3;/' $f && \
+    [ "$(grep -c 'added_pt.curvature = pl_orig.points\[i\].time \* 1e3;' $f)" = 1 ]
+
 RUN source /opt/ros/noetic/setup.bash && \
         catkin_make --pkg livox_ros_driver
 
